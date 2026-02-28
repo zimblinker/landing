@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MAIDSupport Engineering</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #222;
+      background-color: #f5f7fb;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: #0b1020;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #4dd0e1;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav li a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 5px 0;
+      position: relative;
+    }
+
+    nav li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0;
+      height: 2px;
+      background: #4dd0e1;
+      transition: width 0.25s ease-in-out;
+    }
+
+    nav li a:hover::after {
+      width: 100%;
+    }
+
+    #hero {
+      position: relative;
+      color: #fff;
+      padding: 80px 0 70px;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(135deg, rgba(11, 16, 32, 0.9), rgba(24, 40, 74, 0.8)),
+        url("https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?auto=compress&cs=tinysrgb&w=1600");
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-text {
+      flex: 1 1 320px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+    }
+
+    .hero-text h1 span {
+      color: #4dd0e1;
+    }
+
+    .hero-text p {
+      max-width: 520px;
+      margin-bottom: 25px;
+      color: #d5e3ff;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .btn-primary,
+    .btn-outline {
+      padding: 10px 22px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 2px solid transparent;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #4dd0e1;
+      border-color: #4dd0e1;
+      color: #0b1020;
+    }
+
+    .btn-primary:hover {
+      background: #35b3c5;
+      border-color: #35b3c5;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: #4dd0e1;
+      color: #4dd0e1;
+    }
+
+    .btn-outline:hover {
+      background: rgba(77, 208, 225, 0.08);
+    }
+
+    .hero-image {
+      flex: 1 1 260px;
+      text-align: center;
+    }
+
+    .hero-card {
+      display: inline-block;
+      padding: 35px 30px;
+      border-radius: 12px;
+      background: rgba(11, 16, 32, 0.7);
+      border: 1px solid rgba(77, 208, 225, 0.3);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 10px;
+      color: #4dd0e1;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      text-align: left;
+      font-size: 0.9rem;
+      color: #e3efff;
+    }
+
+    .hero-card li + li {
+      margin-top: 6px;
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    section h2.section-title {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    section p.section-subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 35px;
+    }
+
+    #about .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+    }
+
+    #about .about-text {
+      flex: 2 1 320px;
+      font-size: 0.96rem;
+      color: #374151;
+    }
+
+    #about .about-text p + p {
+      margin-top: 12px;
+    }
+
+    #about .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 18px;
+    }
+
+    #about .stat {
+      background: #fff;
+      border-radius: 8px;
+      padding: 12px 15px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      min-width: 120px;
+    }
+
+    #about .stat strong {
+      font-size: 1.1rem;
+      color: #111827;
+    }
+
+    #about .stat span {
+      display: block;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    #about .about-aside {
+      flex: 1 1 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #about .about-image {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+    }
+
+    #about .about-list {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      padding: 20px 18px;
+      font-size: 0.9rem;
+    }
+
+    #about .about-list h3 {
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    #about .about-list ul {
+      list-style: none;
+    }
+
+    #about .about-list li + li {
+      margin-top: 6px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 22px 18px 20px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      border-top: 3px solid #4dd0e1;
+    }
+
+    .service-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+      color: #111827;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-bottom: 8px;
+    }
+
+    .service-card span.tag {
+      font-size: 0.8rem;
+      color: #0b1020;
+      background: #e0f7fa;
+      padding: 3px 7px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-right: 5px;
+      margin-top: 3px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .project-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      display: flex;
+      flex-direction: column;
+      min-height: 210px;
+    }
+
+    .project-body {
+      padding: 18px 16px 14px;
+      flex: 1;
+    }
+
+    .project-body h3 {
+      font-size: 1.02rem;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+
+    .project-body p {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-bottom: 6px;
+    }
+
+    .project-meta {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .project-link {
+      font-size: 0.85rem;
+      padding: 0 16px 14px;
+      color: #2563eb;
+    }
+
+    .project-link a {
+      color: #2563eb;
+      font-weight: 600;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .tech-pill {
+      padding: 6px 10px;
+      font-size: 0.83rem;
+      border-radius: 999px;
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    #contact .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 35px;
+    }
+
+    #contact .contact-info {
+      flex: 1 1 260px;
+      font-size: 0.95rem;
+      color: #374151;
+    }
+
+    #contact .info-item {
+      margin-bottom: 10px;
+    }
+
+    #contact .info-item span {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    #contact form {
+      flex: 1 1 260px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      padding: 20px 18px 18px;
+    }
+
+    #contact form .field {
+      margin-bottom: 12px;
+    }
+
+    #contact label {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      color: #4b5563;
+    }
+
+    #contact input,
+    #contact textarea {
+      width: 100%;
+      padding: 8px 9px;
+      border-radius: 4px;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    #contact textarea {
+      min-height: 90px;
+    }
+
+    #contact button {
+      margin-top: 5px;
+      width: 100%;
+    }
+
+    footer {
+      background: #0b1020;
+      color: #9ca3af;
+      padding: 18px 0;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    footer a {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      #hero {
+        padding-top: 60px;
+      }
+
+      .hero-content {
+        text-align: left;
+      }
+
+      .hero-card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="logo">MAIDSupport</div>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1>Enterprise <span>IT Engineering</span> Solutions</h1>
+        <p>
+          MAIDSupport is a specialized engineering company delivering secure, scalable
+          software systems, cloud infrastructure, and DevOps automation for modern businesses.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn-primary">Request a Consultation</a>
+          <a href="#projects" class="btn-outline">View Case Studies</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-card">
+          <h3>Key Capabilities</h3>
+          <ul>
+            <li>Cloud-native microservices</li>
+            <li>CI/CD and DevOps automation</li>
+            <li>Enterprise integration (APIs, ESB)</li>
+            <li>Security &amp; compliance by design</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About MAIDSupport</h2>
+      <p class="section-subtitle">
+        An engineering‑driven team delivering reliable IT systems from design to production.
+      </p>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            We are an IT engineering company focused on designing, building, and operating
+            business‑critical systems for startups and enterprises. Our engineers cover the
+            full stack: backend services, cloud platforms, networking, automation, and security.
+          </p>
+          <p>
+            From greenfield development to legacy modernization, we combine robust architecture
+            with lean delivery practices. Our goal is simple: predictable delivery, measurable
+            reliability, and transparent communication on every project.
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>10+</strong>
+              <span>Years in operation</span>
+            </div>
+            <div class="stat">
+              <strong>40+</strong>
+              <span>Enterprise clients</span>
+            </div>
+            <div class="stat">
+              <strong>99.9%</strong>
+              <span>Typical uptime target</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-aside">
+          <div class="about-image">
+            <img src="https://images.pexels.com/photos/1181352/pexels-photo-1181352.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                 alt="IT engineering team collaborating in an office">
+          </div>
+
+          <div class="about-list">
+            <h3>Core Engineering Focus</h3>
+            <ul>
+              <li>Solution architecture &amp; technical roadmaps</li>
+              <li>Cloud infrastructure (AWS, Azure, GCP)</li>
+              <li>Backend APIs &amp; integration layers</li>
+              <li>Monitoring, logging, and observability</li>
+              <li>Security hardening &amp; compliance support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title">Services</h2>
+      <p class="section-subtitle">
+        End‑to‑end IT engineering services tailored to your organization.
+      </p>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Custom Software Engineering</h3>
+          <p>
+            Design and build robust web and backend systems that integrate cleanly with your
+            existing tools and infrastructure.
+          </p>
+          <span class="tag">System design</span>
+          <span class="tag">APIs</span>
+          <span class="tag">Microservices</span>
+        </div>
+
+        <div class="service-card">
+          <h3>Cloud &amp; DevOps Engineering</h3>
+          <p>
+            Implement cloud architectures, CI/CD pipelines, and infrastructure‑as‑code to
+            automate deployments and lifecycle operations.
+          </p>
+          <span class="tag">AWS / Azure / GCP</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">IaC</span>
+        </div>
+
+        <div class="service-card">
+          <h3>IT Infrastructure &amp; Networking</h3>
+          <p>
+            Engineer secure and resilient networks, VPNs, and hybrid cloud connectivity
+            tuned for performance and reliability.
+          </p>
+          <span class="tag">Networking</span>
+          <span class="tag">Security</span>
+          <span class="tag">Hybrid cloud</span>
+        </div>
+
+        <div class="service-card">
+          <h3>Site Reliability &amp; Observability</h3>
+          <p>
+            Define SLOs, monitoring, and alerting strategies so your systems can be operated
+            confidently in production.
+          </p>
+          <span class="tag">SRE</span>
+          <span class="tag">Monitoring</span>
+          <span class="tag">Incident response</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Selected Projects</h2>
+      <p class="section-subtitle">
+        A sample of engineering work delivered for clients in different industries.
+      </p>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-body">
+            <h3>Payment Platform Modernization</h3>
+            <p>
+              Migrated a legacy on‑premise payment system to a cloud‑native microservices
+              architecture with automated deployments.
+            </p>
+            <p class="project-meta">
+              Stack: Java, Spring Boot, Kubernetes, PostgreSQL, AWS
+            </p>
+          </div>
+          <div class="project-link">
+            <a href="https://example.com/case-study-payment-platform" target="_blank" rel="noopener">
+              View case study
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <h3>Global Monitoring Platform</h3>
+            <p>
+              Implemented a centralized observability platform aggregating metrics, logs,
+              and traces across 150+ services.
+            </p>
+            <p class="project-meta">
+              Stack: Prometheus, Grafana, ELK, OpenTelemetry
+            </p>
+          </div>
+          <div class="project-link">
+            <a href="https://example.com/case-study-monitoring" target="_blank" rel="noopener">
+              View case study
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <h3>Secure API Gateway</h3>
+            <p>
+              Engineered an API gateway layer with authentication, rate limiting, and
+              auditing to expose internal services safely.
+            </p>
+            <p class="project-meta">
+              Stack: NGINX / Kong, OAuth2, JWT, Terraform
+            </p>
+          </div>
+          <div class="project-link">
+            <a href="https://example.com/case-study-api-gateway" target="_blank" rel="noopener">
+              View case study
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 35px;">
+        <h2 class="section-title">Technologies</h2>
+        <p class="section-subtitle">
+          Preferred tools and platforms used by our engineering teams.
+        </p>
+        <div class="tech-list">
+          <span class="tech-pill">Java</span>
+          <span class="tech-pill">C# / .NET</span>
+          <span class="tech-pill">Node.js</span>
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">React / Angular</span>
+          <span class="tech-pill">Docker</span>
+          <span class="tech-pill">Kubernetes</span>
+          <span class="tech-pill">AWS</span>
+          <span class="tech-pill">Azure</span>
+          <span class="tech-pill">GitHub Actions</span>
+          <span class="tech-pill">Jenkins</span>
+          <span class="tech-pill">Terraform</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-subtitle">
+        Tell us about your project and we will get back to you within one business day.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="info-item">
+            <span>Office:</span> 127 Thurlow Road South, Rosebud, MT 59070
+          </div>
+          <div class="info-item">
+            <span>Phone:</span> +1 (323) 796‑2535
+          </div>
+          <div class="info-item">
+            <span>Email:</span> hello@maidsupport.com
+          </div>
+          <div class="info-item">
+            <span>Business hours:</span> Mon – Fri, 9:00 AM – 6:00 PM
+          </div>
+          <p style="margin-top: 10px;">
+            We can also schedule remote workshops with your engineering and product teams
+            to review architecture and delivery plans.
+          </p>
+        </div>
+
+        <form id="contactForm">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" type="text" placeholder="Your company">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com" required>
+          </div>
+          <div class="field">
+            <label for="message">Project details</label>
+            <textarea id="message" placeholder="Describe your project, timeline, and goals" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      © 2026 MAIDSupport. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const company = document.getElementById("company").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const subject = encodeURIComponent("New project inquiry from " + name);
+      const bodyLines = [
+        "Name: " + name,
+        "Company: " + (company || "N/A"),
+        "Email: " + email,
+        "",
+        "Project details:",
+        message
+      ];
+
+      const body = encodeURIComponent(bodyLines.join("\\n"));
+      const mailtoLink = "mailto:contact@midssupports.net?subject=" + subject + "&body=" + body;
+
+      window.location.href = mailtoLink;
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        const targetId = this.getAttribute("href").substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
