@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   
-    <!-- Privacy-friendly analytics by Plausible -->
-  <script async src="https://plausible.io/js/pa-8M8AOT5QJd9IMRWPXuCnN.js"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async data-site-id="8M8AOT5QJd9IMRWPXuCnN" src="https://plausible.io/js/pa-8M8AOT5QJd9IMRWPXuCnN.js"></script>
   <script>
     window.plausible = window.plausible || function() {
       (plausible.q = plausible.q || []).push(arguments)
@@ -777,7 +777,7 @@
             <span>Phone:</span> +1 (323) 796‑2535
           </div>
           <div class="info-item">
-            <span>Email:</span> hello@maidsupport.com
+            <span>Email:</span> [hello@maidsupport.com](mailto:hello@maidsupport.com)
           </div>
           <div class="info-item">
             <span>Business hours:</span> Mon – Fri, 9:00 AM – 6:00 PM
@@ -837,7 +837,7 @@
         message
       ];
 
-      const body = encodeURIComponent(bodyLines.join("\\n"));
+      const body = encodeURIComponent(bodyLines.join("\\\\n"));
       const mailtoLink = "mailto:contact@midssupports.net?subject=" + subject + "&body=" + body;
 
       window.location.href = mailtoLink;
